@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" content="text/html; charset=utf-8">
+  <title>活动列表</title>
+</head>
+<body>
+<p><a href="/">返回首页</a></p>
+<p>活动列表</p>
+<p>
+<table border="1">
+  <tr>
+    <th>活动名</th>
+    <th>起止时间</th>
+    <th>步数上限</th>
+    <th>步数下限</th>
+    <th>状态</th>
+    <th>选项</th>
+  </tr>
+  <tr>
+    <#list activities as activity>
+  <tr>
+  <td>${activity.name}</td>
+  <td>${activity.start?string('yyyy.MM.dd')} ~ ${activity.end?string('yyyy.MM.dd')}</td>
+  <td>${activity.upperBound}</td>
+  <td>${activity.lowerBound}</td>
+  <td>
+    <#if  activity.status == 0>
+    进行中
+    <#else>
+    已结束
+  </#if>
+  </td>
+  <td><a href="/activity/statis">统计</a>&nbsp;&nbsp;<a href="/activity/end">结束</a></td>
+  </tr>
+   </#list>
+</table>
+</p>
+</body>
+</html>

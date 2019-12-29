@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>新建活动</title>
+</head>
+<body>
+<p><a href="/">返回首页</a></p>
+<hr/>
+<p>
+  <form action="/activity/submit" method="post">
+<p>活动名: <input type="text" name="name"> </p>
+<p>开始日期: <input type="date" name="start">&nbsp;&nbsp;结束日期: <input type="date" name="end"></p>
+<hr/>
+<p>每天步数上限: <input type="text" name="upperBound"></p>
+<p>每天步数下限: <input type="text" name="lowerBound"></p>
+<hr/>
+<p>
+  排名规则:
+  <input type="radio" name="rankRule" value="0" checked/>按照活动期间达标的天数
+  <input type="radio" name="rankRule" value="1"/>按照活动期间步数总和
+</p>
+<hr/>
+<p>奖项比例:</p>
+<p>一等奖: <input type="number" name="first">% &nbsp;&nbsp; 二等奖: <input type="number" name="second">% &nbsp;&nbsp;
+  三等奖: <input type="number" name="third">% &nbsp;&nbsp; 鼓励奖: <input type="number" name="encourage">%
+</p>
+<input type="submit" name="提交" style="height: 200px;width: 200px">
+</form>
+</p>
+</body>
+</html>

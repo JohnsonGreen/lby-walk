@@ -1,0 +1,42 @@
+server:
+    port: 22808
+
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://${db.first.rw.host}:${db.first.rw.port}/${db.first.rw.name}?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: ${db.first.rw.user}
+        password: ${db.first.rw.pwd}
+
+    #    freemarker静态资源配置
+    freemarker:
+        template-loader-path: classpath:/templates
+        cache: false
+        charset: UTF-8
+        check-template-location: true
+        content-type: text/html
+        suffix: .html
+
+#数据库配置
+db:
+    first:
+        rw:
+            name: walk
+            host: localhost
+            port: 3306
+            user: admin
+            pwd: lelexia520
+
+#打印sql
+logging:
+    level:
+        #root: debug
+        com.lby.walk.dao.mapper: debug
+
+#微信相关内容
+wx:
+    appId: wxa2ed8bd96a5e4f1c
+    app_secret: 5f135f687aaaf742c1930f772794ab99
+    grantType: authorization_code
+    api.url: https://api.weixin.qq.com
+
