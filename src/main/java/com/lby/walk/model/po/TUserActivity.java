@@ -18,6 +18,8 @@ public class TUserActivity {
 
     private Integer step;
 
+    private String openid;
+
     private Date ctime;
 
     private Integer status;

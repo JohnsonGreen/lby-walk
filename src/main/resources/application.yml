@@ -1,5 +1,9 @@
 server:
     port: 22808
+#    ssl:
+#        key-store: classpath:javaboy.p12
+#        key-alias: tomcathttps
+#        key-store-password: 727346
 
 spring:
     datasource:
@@ -36,7 +40,9 @@ logging:
 #微信相关内容
 wx:
     appId: wxa2ed8bd96a5e4f1c
-    app_secret: 5f135f687aaaf742c1930f772794ab99
+    appSecret: 5f135f687aaaf742c1930f772794ab99
     grantType: authorization_code
     api.url: https://api.weixin.qq.com
+
+
 

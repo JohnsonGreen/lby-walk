@@ -11,9 +11,11 @@ public class TUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int name;
+    private String name;
 
-    private int type;
+    private Integer type;
+
+    private String openid;
 }

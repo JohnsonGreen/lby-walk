@@ -2,8 +2,11 @@ package com.lby.walk.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lby.walk.dao.mapper.TUserMapper;
+import com.lby.walk.model.po.TUser;
 import com.lby.walk.rpc.WeXinRpc;
 import com.lby.walk.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,12 +16,15 @@ import javax.annotation.Resource;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Value("${wx.appId}")
@@ -33,6 +39,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private WeXinRpc weXinRpc;
 
+    @Resource
+    private TUserMapper userMapper;
+
     @Override
     public JSONObject getSessionKeyOrOpenId(String code) {
 
@@ -45,7 +54,7 @@ public class UserServiceImpl implements UserService {
         //        + code
         //        + "&grant_type=authorization_code";
         //发送post请求读取调用微信接口获取openid用户唯一标识
-        JSONObject jsonObject = JSON.parseObject(weXinRpc.getUserInfo(APP_ID,APP_SECRET,code,grantType));
+        JSONObject jsonObject = JSON.parseObject(weXinRpc.getUserInfo(APP_ID, APP_SECRET, code, grantType));
         return jsonObject;
     }
 
@@ -61,7 +70,7 @@ public class UserServiceImpl implements UserService {
             // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
             int base = 16;
             if (keyByte.length % base != 0) {
-                int groups = keyByte.length / base + (keyByte.length % base != 0 ? 1 : 0);
+                int groups = keyByte.length / base + 1;
                 byte[] temp = new byte[groups * base];
                 Arrays.fill(temp, (byte) 0);
                 System.arraycopy(keyByte, 0, temp, 0, keyByte.length);
@@ -76,7 +85,7 @@ public class UserServiceImpl implements UserService {
             cipher.init(Cipher.DECRYPT_MODE, spec, parameters);// 初始化
             byte[] resultByte = cipher.doFinal(dataByte);
             if (null != resultByte && resultByte.length > 0) {
-                String result = new String(resultByte, "UTF-8");
+                String result = new String(resultByte, StandardCharsets.UTF_8);
                 return JSON.parseObject(result);
             }
         } catch (NoSuchAlgorithmException e) {
@@ -85,5 +94,18 @@ public class UserServiceImpl implements UserService {
             log.info("e:", e);
         }
         return null;
+    }
+
+    @Override
+    public TUser findByOpenid(String openId) {
+        TUser user = new TUser();
+        user.setOpenid(openId);
+        List<TUser> users = userMapper.select(user);
+        return users.size() <= 0 ? null : users.get(0);
+    }
+
+    @Override
+    public void saveUser(TUser user) {
+        userMapper.insert(user);
     }
 }
