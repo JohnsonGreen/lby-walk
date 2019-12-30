@@ -19,11 +19,21 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
+    /**
+     * 返回新建页面
+     * @return
+     */
     @GetMapping("/new")
     public String nw() {
         return "/new";
     }
 
+    /**
+     *
+     * 返回活动列表
+     * @param model
+     * @return
+     */
     @GetMapping("/list")
     public String list(Model model) {
         List<TActivity> activityList = activityService.list();

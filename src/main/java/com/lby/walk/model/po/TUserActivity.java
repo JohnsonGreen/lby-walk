@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Data
-public class TUserActivity {
+public class TUserActivity implements Comparable<TUserActivity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +23,9 @@ public class TUserActivity {
     private Date ctime;
 
     private Integer status;
+
+    @Override
+    public int compareTo(TUserActivity o) {
+        return id < o.id ? -1 : 0;
+    }
 }
