@@ -25,7 +25,7 @@
         <commons-lang3.version>3.7</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-colletions.version>3.2.2</commons-colletions.version>
-        <fastjson.version>1.2.56</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
 
 
