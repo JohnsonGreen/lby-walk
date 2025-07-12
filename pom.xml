@@ -22,7 +22,7 @@
         <tk.mybatis.version>4.1.5</tk.mybatis.version>
         <mybatis.generator.version>1.3.6</mybatis.generator.version>
         <lombok.version>1.16.18</lombok.version>
-        <commons-lang3.version>3.7</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-colletions.version>3.2.2</commons-colletions.version>
         <fastjson.version>1.2.56</fastjson.version>
